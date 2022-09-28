@@ -1,0 +1,84 @@
+<header>
+    <div class="account-container">
+        <% if (!locals.isLogged) { %> 
+         <span class="item register">
+             <a href="/usuarios/register">
+                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                 <small class="text uppercase">Crear cuenta</small>
+             </a>
+         </span>       
+         <span class="item login">  
+             <a href="/usuarios/login">
+             <i class="fa-solid fa-address-card"></i>
+             <small class="text uppercase">Iniciar sesión</small>
+             </a>
+         </span>
+        <% } else { %>
+         <span class="item">
+            <a href="/usuarios/perfil" class="item-link">
+                <i class="fa-solid fa-user"></i>
+                <small class="text uppercase">Mi perfil</small>
+            </a>
+        </span>
+        <span class="item">
+            <a href="/usuarios/salir" class="item-link">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <small class="text uppercase">Salir</small>
+            </a>
+        </span>
+        <% } %>
+    </div>
+     <!--Main Header-->
+     <div class="header-container">
+         <!--Main Header - Left-->
+         <i>
+             <a href="/">
+                 <img src="/images/Logo.svg" alt="Logo-Tienda" class="img-logo">
+             </a>
+         </i>
+         <!--Main Header - Center-->
+         <nav class="nav-container-2">
+             <ul>
+                 <li class="nav-item">
+                     <a href="/" class="uppercase">Home</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/productos" class="uppercase">Productos</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/sucursales" class="uppercase">Sucursales</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/nosotros" class="uppercase">Nosotros</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/building" class="uppercase">Contacto</a>
+                 </li>
+             </ul>
+         </nav>
+         <!--Main Header - Right-->
+         <nav class="nav-container">
+             <ul>
+                 <li class="nav-item">
+                     <a href="/building">
+                         <i class="fa-solid fa-magnifying-glass"></i>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/building">
+                         <i class="fa-solid fa-bookmark"></i>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/cart">
+                         <i class="fa-solid fa-cart-shopping"></i>
+                     </a>
+                 </li>
+                 </li>
+                 <li id="bars-icon" class="nav-item bars-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                 </li>
+             </ul>
+         </nav>
+     </div>
+</header>

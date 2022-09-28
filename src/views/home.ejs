@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" class="html-home">
+  <%- include('./partials/head') %>
+  <body>
+  <%- include('./partials/header') %>
+  <%- include('./partials/mobileNavBar') %>
+  <main>
+
+  <section id="slider-container">
+    <div id="slide-0" class="slide fade">
+      <img class="slide-img"  src="images/img0.jpg" alt="Img 0">
+    </div>
+    <div id="slide-1" class="slide fade">
+      <img class="slide-img" src="images/img1.jpg" alt="Img 1">
+    </div>
+    <div id="slide-2" class="slide fade">
+      <img class="slide-img" src="images/img2.jpg" alt="Img 2">
+    </div>
+  <article class="container-arrows">
+    <div id="arrows-wrapper" class="slider-arrows">
+      <p id="arrow-prev" class="slider-arrow center_y">
+        &#10094;
+      </p>
+      <p id="arrow-next" class="slider-arrow center_y">
+        &#10095;
+      </p>
+    </div>
+  </article>
+
+
+      <div id="dots-wrapper" class="center_x">
+        <div class="dot-nav"></div>
+        <div class="dot-nav"></div>
+        <div class="dot-nav"></div>
+      </div>
+
+  </section>
+    
+      <!-- PRODUCTOS DESTACADOS - TITULO -->
+      <h2 class="home-productos-destacados-titulo">PRODUCTOS DESTACADOS</h2>
+
+      <!-- LINA DE SEPARACIÓN-->
+      <center>
+        <hr class="home-productos-destacados-hr">
+      </center>
+
+      <!-- PRODUCTOS DESTACADOS - GENERADOR -->
+      <section class="contenedor-productos-home">
+        <% products.forEach(product => { %>
+          <a href="/productos/<%= product.id %>">
+            <article class="elements-subcontainer">
+              <section class="img-container">
+                <img src="/images/products/<%= product.productImages[0].image_path %>" alt="producto" />
+              </section>
+              <section class="truck-icon-container">
+                <i class="fa-solid fa-truck fa-xl"></i>
+              </section>
+              <section class="descripcion-container">
+                <p class="titulo"> <%= product.productBrand.name %> </p>
+                <% if (product.discount_percentage > 0) { %>
+                  <p class="descuento"> %<%= product.discount_percentage %> Off</p>  
+                <%} else { %>
+                  <p class="descuento"> - </p>  
+                <% } %>
+                <p> $<%= product.price %> </p>
+              </section>
+            </article>
+          </a>
+        <% }); %>
+      </section>
+      
+      <!-- OFERTAS IMPERDIBLES! - TITULO -->
+      <h2 class="home-ofertas-titulo">OFERTAS IMPERDIBLES!</h2>
+
+      <!-- LINA DE SEPARACIÓN-->
+      <center>
+        <hr class="home-ofertas-hr">
+      </center>
+
+      <!-- OFERTAS - GENERADOR -->
+      <section class="contenedor-productos-home">
+        <% productsWithDiscount.forEach(product => { %>
+          <a href="/productos/<%= product.id %>">
+            <article class="elements-subcontainer">
+              <section class="img-container">
+                <img src="/images/products/<%= product.productImages[0].image_path %>" alt="producto" />
+              </section>
+              <section class="truck-icon-container">
+                <i class="fa-solid fa-truck fa-xl"></i>
+              </section>
+              <section class="descripcion-container">
+                <p class="titulo"> <%= product.productBrand.name %> </p>
+                <p class="descuento"> %<%= product.discount_percentage %> Off</p>
+                <p> $<%= product.price %> </p>
+              </section>
+            </article>
+          </a>
+        <% }); %>
+      </section>
+  </main>
+  <%- include('./partials/footerPrincipal') %>
+  <script src="js/carousel.js"></script>
+
+  </body>
+</html>

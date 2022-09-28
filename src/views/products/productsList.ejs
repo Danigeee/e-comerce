@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" class="html-home">
+    <%- include('../partials/head') %>
+    <body>
+        <%- include('../partials/header') %>
+        <%- include('../partials/mobileNavBar') %>
+        <main>
+            <!--Main title-->
+            <h1 class="products-list-main-title">Nuestros Productos</h1>
+
+            <!--Main Container-->
+            <section class="products-list-container">
+
+                 <!--Product Generator-->
+                <% products.forEach(product => { %> 
+                    <a href="/productos/<%= product.id %>" class="enlace">
+                        <article class="product-container">
+                            <% if (isAdmin == true) { %>
+                                <form action="/productos/<%= product.id %>/eliminar?_method=DELETE" method="POST"  id="delete-form" class="trashcan-icon-container" enctype="application/json">
+                                    <button type="submit" id="delete-button" class="fa-solid fa-trash-can"></button>
+                                </form>
+                            <% } %>
+                            <section class="image-container">
+                                <img src="/images/products/<%= product.productImages[0].image_path %>" alt="product-img">
+                            </section>
+                            <section class="truck-icon-container">
+                                <i class="fa-solid fa-truck fa-xl"></i>
+                            </section>
+                            <section class="title-container">
+                                <h2 class="title"> <%= product.productBrand.name %> </h2>
+                            </section>
+                            <section class="price-discount-container">
+                                <!--If product has %Off-->
+                                 <% if (product.discount_percentage > 0) { %>
+                                    <div>
+                                        <!--Price without discount-->
+                                        <p class="price"><del> $<%= product.price %> </del></p>
+
+                                        <!--%Off-->
+                                        <p class="discount"> <%= product.discount_percentage %>% Off </p>
+                                    </div>
+                                    <!--Price with discount-->
+                                    <p class="price-with-discount">
+                                        $<%= product.price - ((product.price * product.discount_percentage) / 100) %> 
+                                    </p>
+                                        
+                                <!--If not-->
+                                <% } else { %>
+                                    <!--Price-->
+                                    <p class="price"> $<%= product.price %> </p>
+                                <% } %>
+                            </section>
+                        </article>
+                    </a>
+                <% }) %>
+            </section>
+            <% if (isAdmin == true) { %>
+                <div id="product-addBtn-container">
+                  <a href="/productos/nuevo"  class="btn-link">
+                    <i class="fa-solid fa-circle-plus"></i>
+                  </a>
+                </div>
+              <% } %>
+        </main>
+        <%- include('../partials/footerPrincipal') %>
+    </body>
+</html>

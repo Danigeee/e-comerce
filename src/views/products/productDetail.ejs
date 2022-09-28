@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" class="html-home">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/header') %>
+    <%- include('../partials/mobileNavBar') %>
+    <main>
+      <!--Producto-->
+      <section class="contenedor-producto-detalle">
+        <div class="producto-detalle-caja-1">
+          <!--Imagen-->
+          <img src="/images/products/<%= product.productImages[0].image_path %>" class="producto-detalle-img" alt="Zapato"/>
+        </div>
+        <!-- Contenedor Titulo & Precio--> 
+        <div class="producto-detalle-caja-2">
+          <h2 class="titulo"> <%= product.productBrand.name %> </h2>
+          <p class="precio">$<%= product.price %> </p>
+          <%  if (product.discount_percentage > 0) { %>
+            <p class="descuento"> <%= product.discount_percentage %>% Off</p>
+          <% } %>
+          <!--Sizes-->
+          <h4 class="talles-titulo"> Talles </h4>
+          <select name="producto-detalle-talles" id="select-cantidad">
+            <!--forEach -> Sizes -->
+            <optgroup label="EUR"></optgroup>
+            <% product.Sizes.forEach(size => { %>
+              <% if ( size.type  == "EUR") { %>
+                <option value= <%= size.id %> > <%= size.type  + " " + size.value %> </option>
+                <% } %>       
+            <% }) %>
+            <optgroup label="CM"></optgroup>
+            <% product.Sizes.forEach(size => { %>
+              <% if ( size.type  == "CM") { %>
+                <option value= <%= size.id %> > <%= size.type  + " " + size.value %> </option>
+              <% } %>      
+            <% }) %>
+          </select>
+          <h4 class="seleccionar-color-titulo"> Seleccionar Color: </h4>
+          <div class="producto-detalle-colores-container">
+            <span class="color"> <%= product.color %> </span>
+          </div>
+          <hr class="producto-detalle-linea"> 
+          <button class="producto-detalle-boton-carrito">Agregar al carrito</button>
+        </div>
+      </section>
+      <section class="product-description-container">
+        <p><%= product.description %> </p>
+      </section>
+      <!-- Productos relacionados -->
+      <h5 class="product-detail-productos-relacionados-title">PRODUCTOS RELACIONADOS</h5>
+      <center>
+        <hr class="product-detail-destacados-hr"> 
+      </center>
+      <section class="productos-relacionados-container">
+        <div class="child-container">
+          <!-- Solucionar problema <a> -->
+          <% relationatedProducts.forEach(element => { %>
+            <a href="/productos/<%= element.id %>">
+            <article class="flex-item">
+              <img src="/images/products/<%= element.productImages[0].image_path  %>" alt="Producto" />
+              <div class="descripcion-container">
+                <p> <%= element.productBrand.name %> </p>
+                <p>$ <%= element.price %> </p>
+              </div>
+            </article>
+          </a>            
+          <% }); %> 
+        </div>
+    </section>
+    <% if (isAdmin == true) { %>
+      <div id="product-editBtn-container">
+        <a href="/productos/<%= product.id %>/editar"  class="btn-link">
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </div>
+    <% } %>
+    </main>
+    <%- include('../partials/footerPrincipal') %>
+  </body>
+</html>
